@@ -19,6 +19,7 @@ const elements = {
 };
 
 let obstaclesEnabled = false;
+let hasSelectedMode = false;
 let state = createInitialState({ width: GRID_SIZE, height: GRID_SIZE, obstacleCount: 0 });
 let started = false;
 let resetCountdown = null;
@@ -34,7 +35,7 @@ function createGameState() {
 
 function updateModeButtons() {
   for (const button of elements.obstacleModeButtons) {
-    const active = button.dataset.obstaclesMode === (obstaclesEnabled ? 'obstacles' : 'open');
+    const active = hasSelectedMode && button.dataset.obstaclesMode === (obstaclesEnabled ? 'obstacles' : 'open');
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', active ? 'true' : 'false');
   }
@@ -42,6 +43,7 @@ function updateModeButtons() {
 
 function restart() {
   stopResetCountdown();
+  hasSelectedMode = false;
   state = createGameState();
   started = false;
   render();
@@ -117,6 +119,7 @@ function handleKeyDown(event) {
   if (!started) {
     if (event.code === 'ArrowLeft') {
       event.preventDefault();
+      hasSelectedMode = true;
       obstaclesEnabled = false;
       state = createGameState();
       started = true;
@@ -125,6 +128,7 @@ function handleKeyDown(event) {
     }
     if (event.code === 'ArrowRight') {
       event.preventDefault();
+      hasSelectedMode = true;
       obstaclesEnabled = true;
       state = createGameState();
       started = true;
@@ -219,6 +223,7 @@ for (const button of elements.obstacleModeButtons) {
     if (started) {
       return;
     }
+    hasSelectedMode = true;
     obstaclesEnabled = button.dataset.obstaclesMode === 'obstacles';
     state = createGameState();
     render();

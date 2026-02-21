@@ -111,6 +111,7 @@ body {
 }
 
 .overlay-options {
+  --hover-range: clamp(2.4rem, 14vw, 4.7rem);
   position: relative;
   display: flex;
   gap: 0.5rem;
@@ -118,20 +119,61 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0.3rem 0.4rem;
+  padding: 1.45rem 0.4rem 0.3rem;
 }
 
-.overlay-options::before {
+.overlay-snake {
+  position: absolute;
+  left: 50%;
+  top: 0.3rem;
+  width: 6.2rem;
+  height: 1.35rem;
+  pointer-events: none;
+  animation: hoverChoiceSnake 2600ms ease-in-out infinite;
+}
+
+.overlay-snake-head {
+  position: absolute;
+  right: 0.35rem;
+  top: 0.18rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 58% 42% 52% 48%;
+  background: #144f1c;
+  transform: rotate(9deg);
+  box-shadow:
+    -0.48rem 0.02rem 0 #1d6f26,
+    -0.96rem -0.02rem 0 #23812d,
+    -1.44rem 0.05rem 0 #2b9437,
+    -1.92rem -0.03rem 0 #31a13d,
+    -2.4rem 0.07rem 0 #39b349,
+    -2.88rem -0.01rem 0 #45c15a,
+    -3.34rem 0.09rem 0 #60cd72,
+    -3.78rem 0.02rem 0 #7ad989;
+}
+
+.overlay-snake-eye {
+  position: absolute;
+  right: 0.9rem;
+  top: 0.54rem;
+  width: 0.11rem;
+  height: 0.11rem;
+  border-radius: 50%;
+  background: #f8fafc;
+  z-index: 1;
+}
+
+.overlay-snake-tongue {
   content: '';
   position: absolute;
-  left: 1rem;
-  right: 1rem;
-  top: 50%;
-  height: 4px;
+  right: 0.1rem;
+  top: 0.66rem;
+  width: 0.42rem;
+  height: 0.08rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, #9ca3af, #c7ced8, #9ca3af);
-  transform: translateY(-50%);
-  opacity: 0.6;
+  background: #d94646;
+  transform-origin: left center;
+  animation: tongueFlick 700ms ease-in-out infinite;
 }
 
 .overlay-options button {
@@ -214,6 +256,30 @@ body {
   }
   100% {
     transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+@keyframes hoverChoiceSnake {
+  0% {
+    transform: translateX(calc(-50% - var(--hover-range))) translateY(0) rotate(-7deg);
+  }
+  50% {
+    transform: translateX(calc(-50% + var(--hover-range))) translateY(-1px) rotate(7deg);
+  }
+  100% {
+    transform: translateX(calc(-50% - var(--hover-range))) translateY(0) rotate(-7deg);
+  }
+}
+
+@keyframes tongueFlick {
+  0%,
+  100% {
+    transform: scaleX(0.6);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
   }
 }
 
