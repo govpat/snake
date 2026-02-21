@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <h1>Snake</h1>
+        <p>Score: <span id="score-value">0</span></p>
+      </header>
+
+      <p id="status" class="status">Running</p>
+      <section class="board-wrap">
+        <section id="board" class="board" aria-label="Snake board"></section>
+        <div id="start-overlay" class="start-overlay">
+          <div class="overlay-content">
+            <p>Choose your path</p>
+            <div class="overlay-options" role="group" aria-label="Obstacle mode">
+              <button id="mode-open" type="button" data-obstacles-mode="open">Open</button>
+              <button id="mode-obstacles" type="button" data-obstacles-mode="obstacles">Obstacles</button>
+            </div>
+            <p class="overlay-help">Guide the snake with &larr; and &rarr;</p>
+          </div>
+        </div>
+        <div id="game-over-overlay" class="game-over-overlay hidden" aria-live="polite">
+          <div class="overlay-content game-over-content">
+            <p class="game-over-title">Start over</p>
+            <p id="game-over-countdown" class="game-over-countdown">3</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="actions">
+        <button id="pause" type="button">Pause</button>
+        <button id="restart" type="button">Restart</button>
+      </section>
+
+      <section class="mobile-controls" aria-label="Direction controls">
+        <button type="button" data-dir="up">Up</button>
+        <div>
+          <button type="button" data-dir="left">Left</button>
+          <button type="button" data-dir="down">Down</button>
+          <button type="button" data-dir="right">Right</button>
+        </div>
+      </section>
+
+      <p class="hint">Before start: ←/→ select mode, ↑/↓ start. During game: arrows/WASD, pause: space</p>
+    </main>
+
+    <script type="module" src="./src/main.mjs"></script>
+  </body>
+</html>
